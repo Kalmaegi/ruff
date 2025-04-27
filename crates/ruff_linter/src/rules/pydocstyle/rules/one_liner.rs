@@ -27,6 +27,11 @@ use crate::docstrings::Docstring;
 ///     """Return the mean of the given values."""
 /// ```
 ///
+/// ## Fix safety
+///
+/// This fix is marked as unsafe because it may produce a docstring
+/// that exceeds the project's maximum line length
+///
 /// ## References
 /// - [PEP 257 – Docstring Conventions](https://peps.python.org/pep-0257/)
 ///
@@ -51,6 +56,7 @@ impl Violation for UnnecessaryMultilineDocstring {
 pub(crate) fn one_liner(checker: &Checker, docstring: &Docstring) {
     let mut line_count = 0;
     let mut non_empty_line_count = 0;
+    println!("aaaaaaaaaaaaa");
     for line in NewlineWithTrailingNewline::from(docstring.body().as_str()) {
         line_count += 1;
         if !line.trim().is_empty() {
